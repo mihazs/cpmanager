@@ -1,7 +1,9 @@
 version: '3.7'
 services:
   node-backend:
-    command: [sh, -ce, "yarn install && yarn dev"]
+    command: [sh, -ce, "yarn dev"]
+    ports:
+      - 5000:5000
   mongo-express:
     image: mongo-express
     restart: always

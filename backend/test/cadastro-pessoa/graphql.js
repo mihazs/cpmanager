@@ -53,11 +53,7 @@ describe("GraphQL", function(){
                 done();
             } catch(error){
               done(error);
-            }
-                
-              
-              
-              
+            } 
 
         });
     });

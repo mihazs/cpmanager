@@ -9,10 +9,11 @@ const server = new ApolloServer({
   modules: [Modules],
   //Contexto, nesse caso usado para armazenar a session
   context: session => session,
-  playground: (process.env.NODE_ENV === "developement")
+  playground: true,
+  introspection: true
 });
 
 //Dá início ao servidor
-server.listen(4000, () =>{
-    log("Servidor rodando na porta 4000 :rocket:"); //Emojis, por que não??
+server.listen(5000, () =>{
+    log(`Servidor rodando na porta 5000 :rocket:`); //Emojis, por que não??
 });

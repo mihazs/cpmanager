@@ -1,4 +1,4 @@
-import {Schema, model} from "mongoose";
+import mongoose, {Schema} from "mongoose";
 import {cnpj, cpf} from "cpf-cnpj-validator";
 
 const cadastroPessoaSchema = new Schema({
@@ -17,4 +17,4 @@ const cadastroPessoaSchema = new Schema({
         default: false
     }
 });
-export default model("CadastroPessoa", cadastroPessoaSchema);
+export default mongoose.model("CadastroPessoa", cadastroPessoaSchema);

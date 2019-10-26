@@ -18,7 +18,9 @@ const resolvers = {
         },        
     },
     Mutation: {
-
+        insert_cadastro_pessoa: (root, {input}, _, fieldASTs) => CadastroPessoa.insertMany(input),
+        update_cadastro_pessoa: (root, {input, filter}, _, fieldASTs) => CadastroPessoa.updateMany(filter, input).exec(),
+        delete_cadastro_pessoa: (root, {filter}, _, fieldASTs) => CadastroPessoa.deleteMany(filter).exec(),
     }
 }
 

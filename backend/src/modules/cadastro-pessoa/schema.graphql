@@ -104,17 +104,15 @@ type Mutation{
     """
     update_cadastro_pessoa(
         "Novo valor do cadastro pessoa" 
-        input: UpdateCadastroPessoaInput, 
+        input: UpdateCadastroPessoaInput!, 
         "Filtra quais valores serão alterados"
-        filter: SelectCadastroPessoaInput) : [CadastroPessoa]
+        filter: SelectCadastroPessoaInput!) : [CadastroPessoa]
 
     """
     Deleta um ou vários objetos do tipo cadastro pessoa
     """
     delete_cadastro_pessoa(
-        "Novo valor do cadastro pessoa" 
-        input: UpdateCadastroPessoaInput, 
-        "Filtra quais valores serão alterados"
-        filter: SelectCadastroPessoaInput) : [CadastroPessoa]
+        "Filtra quais valores serão deletados"
+        filter: SelectCadastroPessoaInput!) : [CadastroPessoa]
     
 }
