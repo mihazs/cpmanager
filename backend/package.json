@@ -1,0 +1,45 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend do cpmanager",
+  "main": "./dist/index.js",
+  "author": "Mihael Zamin Sousa",
+  "license": "GPL",
+  "private": true,
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "dev": "BABEL_DISABLE_CACHE=1 ./node_modules/.bin/babel-watch src/index.js",
+    "build": "BABEL_DISABLE_CACHE=1 babel src --out-dir ./dist",
+    "test": "BABEL_DISABLE_CACHE=1 ./node_modules/.bin/mocha --require @babel/register -R spec --ui bdd --watch --watch-extensions js test/**/*.js --reporter min"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "babel-plugin-import-graphql": "^2.7.0",
+    "babel-watch": "^7.0.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
+    "sinon": "^7.5.0"
+  },
+  "dependencies": {
+    "@graphql-modules/core": "^0.7.13",
+    "@graphql-modules/di": "^0.7.13",
+    "apollo-server": "^2.9.7",
+    "console-emoji": "^0.0.2",
+    "cpf-cnpj-validator": "^0.1.0",
+    "graphql": "^14.5.8",
+    "graphql-compose": "^7.4.0",
+    "graphql-compose-mongoose": "^7.2.0",
+    "graphql-db-projection": "^1.0.14",
+    "graphql-import": "^0.7.1",
+    "graphql-import-node": "^0.0.4",
+    "graphql-tag": "^2.10.1",
+    "graphql-toolkit": "^0.6.2",
+    "graphql-tools": "^4.0.6",
+    "mongoose": "^5.7.7"
+  }
+}

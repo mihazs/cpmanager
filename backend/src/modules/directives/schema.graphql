@@ -1,0 +1,7 @@
+directive @proj(
+    projection: String,
+    projections: [String],
+    nameInDB: String
+  ) on FIELD_DEFINITION
+  directive @all on FIELD_DEFINITION
+  directive @ignore on FIELD_DEFINITION

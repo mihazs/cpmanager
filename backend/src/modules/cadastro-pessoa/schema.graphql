@@ -1,0 +1,120 @@
+"""
+Representa um cadastro de pessoa, pode uma pessoa física(que armazenará um cpf) ou jurídica
+"""
+type CadastroPessoa {
+    """
+    Identificador do cadastro pessoa
+    """
+    _id: ID!
+    """
+    Número do cadastro, pode ser um cpf(8 dígitos) ou um cnpj(12 dígitos) não formatado
+    """
+    number: String!
+    """
+    Atributo usado para identificar se o cadastro está na blacklist ou não, default:false
+    """
+    blacklisted: Boolean
+}
+
+"""
+Input para a inserção do tipo cadastro pessoa
+"""
+input InsertCadastroPessoaInput {
+    """
+    Identificador do cadastro pessoa
+    """
+    _id: ID
+    """
+    Número do cadastro, pode ser um cpf(8 dígitos) ou um cnpj(12 dígitos) não formatado
+    """
+    number: String!
+    """
+    Atributo usado para identificar se o cadastro está na blacklist ou não
+    """
+    blacklisted: Boolean = false
+}
+"""
+Input para a seleção do tipo cadastro pessoa
+"""
+input SelectCadastroPessoaInput {
+    """
+    Identificador do cadastro pessoa
+    """
+    _id: ID
+    """
+    Número do cadastro, pode ser um cpf(8 dígitos) ou um cnpj(12 dígitos) não formatado
+    """
+    number: String
+    """
+    Atributo usado para identificar se o cadastro está na blacklist ou não
+    """
+    blacklisted: Boolean
+}
+
+"""
+Input para a seleção do tipo cadastro pessoa
+"""
+input UpdateCadastroPessoaInput {
+    """
+    Número do cadastro, pode ser um cpf(8 dígitos) ou um cnpj(12 dígitos) não formatado
+    """
+    number: String
+    """
+    Atributo usado para identificar se o cadastro está na blacklist ou não
+    """
+    blacklisted: Boolean
+}
+"""
+Input para paginação de elementos
+"""
+input Pagination {
+    """
+    Tamanho da página
+    """
+    size: Int! = 10
+    """
+    Número da página
+    """
+    number: Int!
+
+}
+
+
+type Query{
+    """
+    Consulta para obter uma lista de cadastros de pessoas
+    """
+    select_cadastro_pessoa(
+        "Filtragem dos campos de cadastro pessoa"
+        filter: SelectCadastroPessoaInput, 
+        "Paginação do retorno" 
+        pagination: Pagination) : [CadastroPessoa]
+}
+
+type Mutation{
+    """
+    Insere um ou vários objetos do tipo cadastro pessoa
+    """
+    insert_cadastro_pessoa(
+        "Lista de objetos a serem inseridos" 
+        input: [InsertCadastroPessoaInput!]!) : [CadastroPessoa]
+
+    """
+    Faz o update de um ou vários objetos do tipo cadastro pessoa
+    """
+    update_cadastro_pessoa(
+        "Novo valor do cadastro pessoa" 
+        input: UpdateCadastroPessoaInput, 
+        "Filtra quais valores serão alterados"
+        filter: SelectCadastroPessoaInput) : [CadastroPessoa]
+
+    """
+    Deleta um ou vários objetos do tipo cadastro pessoa
+    """
+    delete_cadastro_pessoa(
+        "Novo valor do cadastro pessoa" 
+        input: UpdateCadastroPessoaInput, 
+        "Filtra quais valores serão alterados"
+        filter: SelectCadastroPessoaInput) : [CadastroPessoa]
+    
+}

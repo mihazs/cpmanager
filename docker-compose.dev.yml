@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  node-backend:
+    command: [sh, -ce, "yarn install && yarn dev"]
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment: 
+      - NODE_ENV=development
+
