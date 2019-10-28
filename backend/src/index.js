@@ -4,7 +4,7 @@ import log from 'console-emoji';
 import {connect} from "mongoose";
 
 //Connect to mongodb
-connect()
+connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 //Constrói um apollo server baseado nos graphql modules passados
 const server = new ApolloServer({
     //Módulos do servidor apollo
