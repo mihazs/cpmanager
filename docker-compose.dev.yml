@@ -4,6 +4,21 @@ services:
     command: [sh, -ce, "yarn dev"]
     ports:
       - 5000:5000
+    environment: 
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongodb:27017/cpmanagerdev
+  node-test:
+    image: node:alpine
+    working_dir: /app
+    command: [sh, -c, "yarn test"]
+    restart: always
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+    environment: 
+      - MONGODB_URI=mongodb://mongodb:27017/cpmanagertest
+      - NODE_ENV=test
   mongo-express:
     image: mongo-express
     restart: always

@@ -4,7 +4,12 @@ then
     echo "Use dev para iniciar o servidor de desenvolvimento ou prod para iniciar o servidor de produção"
     exit 1
 fi
+if [ $2 != "logs" ]
+then
 echo "$1 server $2..."
 docker-compose -f docker-compose.yml -f docker-compose.$1.yml $2 $3
+else
+docker-compose -f docker-compose.yml -f docker-compose.$1.yml logs -f $3
+fi
 
 

@@ -1,8 +1,10 @@
 import { ApolloServer } from 'apollo-server';
 import Modules from  './modules';
 import log from 'console-emoji';
+import {connect} from "mongoose";
 
-
+//Connect to mongodb
+connect()
 //Constrói um apollo server baseado nos graphql modules passados
 const server = new ApolloServer({
     //Módulos do servidor apollo

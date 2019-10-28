@@ -5,7 +5,7 @@ import AppModule from "../../src/modules";
 import mongoose from "mongoose";
 import makeProjection, {toMongoProjection} from 'graphql-db-projection';
 import gql from "graphql-tag";
-import { rejects } from "assert";
+
 
 
 describe("GraphQL", function(){
@@ -13,11 +13,11 @@ describe("GraphQL", function(){
       
         for (let model in mongoose.models) delete mongoose.models[model]
       });
-    context("CadastroPessoa", async function(done){
+    context("CadastroPessoa", function(){
         beforeEach(function(){
             AppModule.resetMock();
           });
-        it('deve ser válido se o select for válido', async function(done) {
+        it('deve ser válido se o select for válido', function(done) {
           
 
             const data = [{ _id: 1, number: "42026542007", blacklisted: false},
@@ -34,26 +34,28 @@ describe("GraphQL", function(){
                    }
                 }
             });
+            
              expect(schema,  "schema não gerado").to.exist;
-             try{
-            const result = await execute({
+
+            const query = execute({
                 schema,
                 document: gql`
                   query {
                     select_cadastro_pessoa(_id: 1) {
-                     number,
-                     blacklisted
+                      number
+                      blacklisted
                     }
                   }
                 `,
-              });
-                expect(result.errors).to.be.false;
-                expect(result.data["select_cadastro_pessoa"]["blacklisted"]).to.be.equal(false);
-                expect(result.data["select_cadastro_pessoa"]["number"]).to.be.equal("42026542007");
-                done();
-            } catch(error){
-              done(error);
-            } 
+              }).then(result => {
+                console.log(result);
+              expect(result.errors).to.be.false;
+              expect(result.data["select_cadastro_pessoa"]["blacklisted"]).to.be.equal(false);
+              expect(result.data["select_cadastro_pessoa"]["number"]).to.be.equal("42026542007");
+              done();
+             });
+                
+           
 
         });
     });
