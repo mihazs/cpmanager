@@ -10,7 +10,6 @@ import gql from "graphql-tag";
 
 describe("GraphQL", function(){
     before(function() {
-      
         for (let model in mongoose.models) delete mongoose.models[model]
       });
     context("CadastroPessoa", async function(done){
