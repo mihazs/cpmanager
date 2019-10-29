@@ -12,7 +12,7 @@ const resolvers = {
             //Cria a query para filtrar e localizar
             var query = CadastroPessoa.find(filter || {}, toMongoProjection(makeProjection(fieldASTs)));
             if(pagination){
-                query = query.skip(pagination.size*(n-1)).limit(pagination.size);
+                query = query.skip(pagination.size*(pagination.number-1)).limit(pagination.size);
             }
             return query.exec();
         },        

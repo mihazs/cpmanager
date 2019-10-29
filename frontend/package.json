@@ -3,15 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-boost": "^0.4.4",
+    "apollo-cache-inmemory": "^1.6.3",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "node-sass": "^4.13.0",
     "rbx": "^2.2.0",
     "react": "^16.11.0",
     "react-apollo": "^3.1.3",
+    "react-apollo-network-status": "^2.0.0",
     "react-dom": "^16.11.0",
+    "react-fader": "^3.1.0",
+    "react-reveal": "^1.2.2",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-router-transition-switch": "^1.1.1",
     "react-scripts": "3.2.0",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "styled-icons": "^8.6.0",
+    "use-progress": "^2.0.1",
+    "use-react-router": "^1.0.7"
   },
   "scripts": {
     "start": "react-scripts start",
