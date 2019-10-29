@@ -1,9 +1,15 @@
 version: '3.7'
 services:
     node-backend:
-      command: [sh, -ce, "yarn install && yarn build && yarn start"]
+      build: ./backend
       environment: 
         - NODE_ENV=production
       ports:
         - 5000:5000
+    frontend:
+      build: ./frontend
+      environment: 
+        - NODE_ENV=production
+      ports:
+        - 80:80
 

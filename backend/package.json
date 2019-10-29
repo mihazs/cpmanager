@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "dev": "BABEL_DISABLE_CACHE=1 ./node_modules/.bin/babel-watch src/index.js",
-    "build": "BABEL_DISABLE_CACHE=1 babel src --out-dir ./dist",
+    "build": "BABEL_DISABLE_CACHE=1 ./node_modules/.bin/babel src --out-dir ./dist",
     "test": "BABEL_DISABLE_CACHE=1 ./node_modules/.bin/mocha --require @babel/register -R spec --ui bdd --watch --watch-extensions js test/**/*.js --reporter min"
   },
   "devDependencies": {

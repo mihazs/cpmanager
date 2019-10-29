@@ -4,12 +4,10 @@ services:
     image: mongo
     restart: always
   node-backend:
-    image: node:alpine
+    image: node
     restart: always
     working_dir: /app
     depends_on:
       - mongodb
-    volumes:
-      - ./backend:/app
     environment: 
       - MONGODB_URI=mongodb://mongodb:27017/cpmanager
