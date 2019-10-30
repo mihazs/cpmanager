@@ -1,54 +1,53 @@
-import { Box, Column } from "rbx";
-import React, {useState} from "react";
-import styled from "styled-components";
-import {TrashAlt} from "styled-icons/fa-solid/TrashAlt";
-
-const Trash = styled(TrashAlt)`
-  color: rgba(255, 255, 255, 0.5);
+import { Box, Button, Column, Icon, Tag, Loader } from "rbx";
+import React from "react";
+import { AddCircle } from "./icons.js";
+import { Row } from "./row.js";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-`;
 
-const Line = styled.div`
-  width: 100%;
-  border-bottom: solid 0.6px rgba(0, 0, 0, 0.2);
-`;
-const RowBody = styled(Column)`
-  font-size: 2.75em;
-  
-`;
-const ActionIcon = styled(Column)`
-  background-color: ${({background = "#000"}) => background};
-  opacity: ${({hide = true}) => hide ? 0 : 1};
-  transition: all 0.2s;
-  
-  
-`;
-
-const Row = ({ data, key, divider = true }) => {
-  const [toggleClick, setToggleClick] = useState(false);
-  const size = (toggle) => toggle ? 2 : 0;
+export default ({ data, onActionClick, onAddNewClick, hasMore, next, onFilterSelect}) => {
   return (
     <>
-      <Column key={key} size="full" textAlign="centered" style={{height: "100%"}} >
-        <Column.Group centered vcentered style={{height: "100%"}}>
-          <RowBody onClick = {() => {setToggleClick(!toggleClick)}}>{data.number}</RowBody>
-          <ActionIcon background ="#fd79a8"  hide = {!toggleClick} size = {size(toggleClick)}><Trash/></ActionIcon>
+      <Column.Group gapless centered vcentered>
+        <Column>
+          <Button rounded onClick = {()=>{if(typeof onAddNewClick === "function") onAddNewClick();}}>
+            <Icon size="small">
+              <AddCircle />
+            </Icon>
+            <span>Novo</span>
+          </Button>
+        </Column>
+        <Column narrow>
+          <Tag.Group gapless>
+            <Tag as={Button} onClick= {()=>{
+              if(typeof onFilterSelect === "function") onFilterSelect("blacklist");
+            }} color="black" size="medium">
+              Blacklist
+            </Tag>
+            <Tag as={Button} onClick= {()=>{
+              if(typeof onFilterSelect === "function") onFilterSelect("whitelist");
+            }} color="white" size="medium">
+              Whitelist
+            </Tag>
+          </Tag.Group>
+        </Column>
+      </Column.Group>
+      <InfiniteScroll dataLength = {(data ? data : []).length} loader ={<Loader/>} hasMore={hasMore} next = {next} scrollableTarget={window} style={{overflow:"hidden"}}>
+      <Column.Group multiline as={Box} style={{overflow:"hidden"}}>
+      {data.length > 0 ? (
+          data.map((element, i) => (
+            <Row data={element} key={i} divider={data.length - 1 > i} onActionClick />
+          ))
+        ) : (
+          <p>Sem registros para exibir.</p>
+        )}
         </Column.Group>
-      </Column>
-      {divider ? <Line /> : <></>}
+          </InfiniteScroll>
+
     </>
   );
 };
 
-export default ({ data }) => (
-  <Column.Group vcentered centered>
-    <Column size="one-quarter">
-      <Column.Group multiline as={Box}>
-        {data.map((element, i) => (
-          <Row data={element} key={i} divider={data.length - 1 > i} />
-        ))}
-      </Column.Group>
-    </Column>
-  </Column.Group>
-);
+
+

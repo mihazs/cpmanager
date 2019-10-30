@@ -15,7 +15,15 @@ const resolvers = {
                 query = query.skip(pagination.size*(pagination.number-1)).limit(pagination.size);
             }
             return query.exec();
-        },        
+        },
+        has_more_pages: (root, {filter, pagination}, _, fieldASTs) =>{
+            //Cria a query para filtrar e localizar
+            var query = CadastroPessoa.find(filter || {}, toMongoProjection(makeProjection(fieldASTs)));
+            if(pagination){
+                query = query.skip(pagination.size*(pagination.number)).limit(pagination.size).countDocuments();
+            }
+            return query.exec();
+        },          
     },
     Mutation: {
         insert_cadastro_pessoa: (root, {input}, _, fieldASTs) => CadastroPessoa.insertMany(input),

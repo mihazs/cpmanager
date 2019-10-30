@@ -89,6 +89,14 @@ type Query{
         filter: SelectCadastroPessoaInput, 
         "Paginação do retorno" 
         pagination: Pagination) : [CadastroPessoa]
+    """
+    Verifica se há mais páginas a serem retornadas e retorna a quantidade de objetos que ainda restam.
+    """
+    has_more_pages(
+        "Filtragem dos campos de cadastro pessoa" 
+    filter: SelectCadastroPessoaInput, 
+    "Parâmetros de paginação" 
+        pagination: Pagination): Int
 }
 
 type Mutation{
