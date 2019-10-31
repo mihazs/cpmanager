@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
     background-attachment: fixed;
     background-size: contain;
     min-height:100vh;
+
   }
 `;
 //Componente para lidar com o progresso das queries e mostrar o nprogress

@@ -6,11 +6,21 @@ import CadastroPessoa from "../../model/cadastro-pessoa";
 import mongoose from "mongoose";
 import makeProjection, {toMongoProjection} from 'graphql-db-projection';
 
+const makeSearchableNumber = (filter) =>{
+    var r = filter;
+    if(filter){
+        if(filter.hasOwnProperty("number")){
+            r.number = {"$regex": `/.*${number}*./`, "$options": "is"}
+        }
+    }
+    return r;
+}
 const resolvers = {
     Query: {
         select_cadastro_pessoa: (root, {filter, pagination}, _, fieldASTs) =>{
             //Cria a query para filtrar e localizar
-            var query = CadastroPessoa.find(filter || {}, toMongoProjection(makeProjection(fieldASTs)));
+            
+            var query = CadastroPessoa.find(makeSearchableNumber(filter) || {}, toMongoProjection(makeProjection(fieldASTs)));
             if(pagination){
                 query = query.skip(pagination.size*(pagination.number-1)).limit(pagination.size);
             }
@@ -18,7 +28,7 @@ const resolvers = {
         },
         has_more_pages: (root, {filter, pagination}, _, fieldASTs) =>{
             //Cria a query para filtrar e localizar
-            var query = CadastroPessoa.find(filter || {}, toMongoProjection(makeProjection(fieldASTs)));
+            var query = CadastroPessoa.find(makeSearchableNumber(filter) || {}, toMongoProjection(makeProjection(fieldASTs)));
             if(pagination){
                 query = query.skip(pagination.size*(pagination.number)).limit(pagination.size).countDocuments();
             }

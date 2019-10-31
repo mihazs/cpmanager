@@ -12,7 +12,7 @@ import {
   Whitelist
 } from "./icons.js";
 
-export const Row = ({ data, key, divider = true, onActionClick }) => {
+export const Row = ({ data, divider = true, onActionClick }) => {
   //estado usado para lidar com o click na row, quando ele é verdadeiro, mostra as actions disponíveis
   const [toggleClick, setToggleClick] = useState(false);
   //estado que  coloca a row no modo de edição
@@ -29,7 +29,6 @@ export const Row = ({ data, key, divider = true, onActionClick }) => {
   return (
     <>
       <Column
-        key={key}
         size="full"
         textAlign="centered"
         style={{ height: "100%" }}
@@ -52,7 +51,7 @@ export const Row = ({ data, key, divider = true, onActionClick }) => {
               ) : (
                 <Field >
                   <Control>
-                    <Input as={CPInput} size="large" valid={b => {}} value={data.number} />
+                    <Input as={CPInput} size="large" value={data.number} />
                   </Control>
                 </Field>
               )}
